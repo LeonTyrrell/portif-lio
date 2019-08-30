@@ -15,6 +15,7 @@ setnome = str(hoje)
 year = setnome[:4]
 name = setnome[5:]
 User = input('Enter computer user: ')
+cont = 0
 
 
 # Criando o nome para mover a última pasta criada / Creating name to move to last folder created
@@ -24,6 +25,10 @@ while True:
     oi = nomemover[5:]
     if os.path.exists(f'C:/Users/{User}/Pictures/{nomemover[5:]}'):
         break
+    else:
+        cont += 1
+        if cont == 1000:
+            break
 
 
 # Criando pasta do ano atual / Creating current year dir
