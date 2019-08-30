@@ -1,0 +1,42 @@
+'''
+Esse script gera pastas com o nome do dia em que ele for executado e caso exista uma do dia passado ele move a pasta para
+uma pasta do ano atual.
+This script generates folders with the name of the day it runs and if there is one from last day it moves the folder to
+a folder also from the current year.
+'''
+
+
+import os, datetime, shutil
+
+
+hoje = datetime.date.today()
+nome = hoje
+setnome = str(hoje)
+year = setnome[:4]
+name = setnome[5:]
+User = input('Enter computer user: ')
+
+
+# Criando o nome para mover a última pasta criada / Creating name to move to last folder created
+while True:
+    hoje -= datetime.timedelta(days=1)
+    nomemover = str(hoje)
+    oi = nomemover[5:]
+    if os.path.exists(f'C:/Users/{User}/Pictures/{nomemover[5:]}'):
+        break
+
+
+# Criando pasta do ano atual / Creating current year dir
+if not os.path.exists(f'C:/Users/{User}/Pictures/{year}'):
+    os.mkdir(f'C:/Users/{User}/Pictures/{year}')
+
+# Movendo pasta / Moving dir
+if os.path.exists(f'C:/Users/{User}/Pictures/{oi}'):
+    shutil.move(f'C:/Users/{User}/Pictures/{oi}',
+                f'C:/Users/{User}/Pictures/{year}')
+
+# Criando pasta do dia atual / Creating current day folder
+if not os.path.exists(f'C:/Users/{User}/Pictures/{name}'):
+    os.mkdir(f'C:/Users/{User}/Pictures/{name}')
+    if os.path.exists(f'C:/Users/{User}/Pictures/{name}'):
+        os.mkdir(f'C:/Users/{User}/Pictures/{name}/pronto')
